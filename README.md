@@ -2,7 +2,9 @@
 
 A full-stack MERN (MongoDB, Express, React, Node) web application featuring a clean, responsive, and minimalist black-and-white design layout.
 
-## Features
+---
+
+## Key Features
 
 1. **Landing Page**: Information about Naye Pankh Foundation, its mission, vision, volunteer benefits, dynamically fetched application statistics (total vs. approved), and action triggers.
 2. **Volunteer Registration Form**: Modern registration fields (Full Name, Email, Phone, Age, Skills, Availability, Commitment, and Motivation) with thorough client-side inputs verification and backend validation.
@@ -22,7 +24,32 @@ A full-stack MERN (MongoDB, Express, React, Node) web application featuring a cl
 
 ---
 
-## Project Structure
+## System Architecture
+
+The application is structured as a decoupled client-server architecture:
+
+```mermaid
+graph TD
+    Client[React Frontend - localhost:5173] <--> |HTTPS / JSON Data + JWT| API[Express API Server - localhost:5000]
+    API <--> |Mongoose ODM| DB[(MongoDB Database)]
+    
+    subgraph Frontend Components
+        Client --> Pages[Landing, Register, Login, Dashboard]
+        Pages --> Router[React Router DOM]
+        Pages --> CSS[Monochrome Design System]
+    end
+    
+    subgraph Backend Services
+        API --> Routes[Auth & Volunteer Routes]
+        Routes --> Middlewares[Auth Filter / JWT Verify]
+        Middlewares --> Controllers[Auth & Volunteer Controllers]
+        Controllers --> Models[Admin & Volunteer Schemas]
+    end
+```
+
+---
+
+## Folder Structure
 
 ```text
 ├── backend/
@@ -61,7 +88,7 @@ A full-stack MERN (MongoDB, Express, React, Node) web application featuring a cl
 
 ---
 
-## Installation & Setup
+## Installation and Setup
 
 ### Prerequisites
 
@@ -110,3 +137,9 @@ If using default configurations, you can access the admin dashboard using:
 
 * **Email**: `admin@nayepankh.org`
 * **Password**: `admin123`
+
+---
+
+## Author
+
+* **pavan05-sai** - [GitHub Profile](https://github.com/pavan05-sai)
